@@ -28,13 +28,13 @@ I'm aware that this isn't entirely insightful documentation, but it's a start an
 
 Some notes on OAuth2 and Basic Authentication:
 
-Visit https://platform.harvestapp.com/oauth2_clients/ to set up an OAuth2 client.
+Visit `https://YOURSUBDOMAINHERE.harvestapp.com/oauth2_clients/` to set up an OAuth2 client.
 For the redirect URI required in Harvest's site:
-- Retrieve Google script project code from File>Project Properties>Info>Project Key
+- Retrieve Google script project code from `File>Project Properties>Info>Project Key`
 - Use that code in the redirect URI which looks like:
-- https://script.google.com/macros/d/PROJECT CODE HERE/usercallback
+- `https://script.google.com/macros/d/PROJECT CODE HERE/usercallback`
 When setting up the authentication, this message is sent via the authentication library:
-- https://example.harvestapp.com/oauth2/authorize?client_id=...&redirect_uri=https%3A%2F%2Fscript.google.com%2Fmacros%2Fd%2FPROJECT CODE HERE%2Fusercallback
+- `https://example.harvestapp.com/oauth2/authorize?client_id=...&redirect_uri=https%3A%2F%2Fscript.google.com%2Fmacros%2Fd%2FPROJECT CODE HERE%2Fusercallback`
 
 ---
 
@@ -42,13 +42,15 @@ Non-OAuth2 authentication:
 
 HTTP Basic Authentication requires your username and password stored in plain text which is simpler, and its header looks like this:
 
+```
 var auth = Utilities.base64Encode("email@example.com:someharvestpassword");
 var headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Authorization": "Basic " + auth
 }
+```
 
-If you want Basic authentication, you can ditch startService(), getHarvestService(), authCallback(), and clearService().
+If you want Basic authentication, you can ditch `startService()`, `getHarvestService()`, `authCallback()`, and `clearService()`.
 
-You also don't need the OAuth2 library. Just modify the header creation.
+You also won't need the OAuth2 library. Just modify the header creation.
