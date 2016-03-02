@@ -2,6 +2,9 @@
 
 Integrates Google Sheets with Harvest App.
 
+This script requires the use of an authentication library.
+See OAuth2 library documentation at: https://github.com/googlesamples/apps-script-oauth2
+
 This implementation is proprietary to some sheets that I am using, but the core functionality for integrating with Google Sheets (such as the authentication) is still here.
 
 These are the instructions which exist inside the "Controls" sheet, and are what allows any user in any project to utilize this script:
@@ -20,3 +23,32 @@ These are the instructions which exist inside the "Controls" sheet, and are what
 ```
 
 I'm aware that this isn't entirely insightful documentation, but it's a start and it's better than nothing.
+
+---
+
+Some notes on OAuth2 and Basic Authentication:
+
+Visit https://platform.harvestapp.com/oauth2_clients/ to set up an OAuth2 client.
+For the redirect URI required in Harvest's site:
+- Retrieve Google script project code from File>Project Properties>Info>Project Key
+- Use that code in the redirect URI which looks like:
+- https://script.google.com/macros/d/PROJECT CODE HERE/usercallback
+When setting up the authentication, this message is sent via the authentication library:
+- https://example.harvestapp.com/oauth2/authorize?client_id=...&redirect_uri=https%3A%2F%2Fscript.google.com%2Fmacros%2Fd%2FPROJECT CODE HERE%2Fusercallback
+
+---
+
+Non-OAuth2 authentication:
+
+HTTP Basic Authentication requires your username and password stored in plain text which is simpler, and its header looks like this:
+
+var auth = Utilities.base64Encode("email@example.com:someharvestpassword");
+var headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Basic " + auth
+}
+
+If you want Basic authentication, you can ditch startService(), getHarvestService(), authCallback(), and clearService().
+
+You also don't need the OAuth2 library. Just modify the header creation.
