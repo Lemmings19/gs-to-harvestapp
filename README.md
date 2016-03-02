@@ -1,6 +1,6 @@
 # gs-to-harvestapp
 
-Integrates Google Sheets with Harvest App.
+Partial integration of Google Sheets with Harvest App. (add tasks to project, add hour budget to those tasks)
 
 This script requires the use of an authentication library.
 See OAuth2 library documentation at: https://github.com/googlesamples/apps-script-oauth2
