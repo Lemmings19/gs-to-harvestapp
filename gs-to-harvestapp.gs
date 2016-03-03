@@ -1,8 +1,8 @@
 // Set up the Google Spreadsheets dropdown menu
 function onOpen() {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var menuEntries = [{name: "Create Harvest Tasks", functionName: "scanSheet"},
-    {name: "Update task hours", functionName: "updateProjectTaskHours"},
+    var menuEntries = [{name: "Add tasks and hours to Harvest", functionName: "scanSheet"},
+    {name: "Add hours to Harvest", functionName: "updateProjectTaskHours"},
     {name: "Authenticate with Harvest", functionName: "startService"},
     {name: "Generate redirect URI", functionName: "generateRedirectURI"}];
     ss.addMenu("Harvest", menuEntries);
@@ -141,7 +141,7 @@ function scanSheet(upload) {
 function generateRedirectURI() {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Controls");
 
-    var projectKeyCell = sheet.getRange(19, 2, 1, 1);
+    var projectKeyCell = sheet.getRange(20, 3, 1, 1);
 
     projectKeyCell.setValue("https://script.google.com/macros/d/" + ScriptApp.getProjectKey() + "/usercallback");
 }
