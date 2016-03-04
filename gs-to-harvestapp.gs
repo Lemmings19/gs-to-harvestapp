@@ -10,9 +10,9 @@ function onOpen() {
 
 // Get/update the control values.
 function checkControlValues() {
-    var col = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Controls").getRange("C1:C26").getValues();
+    var col = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Controls").getRange("C1:C29").getValues();
 
-    var sheetName = col[6][0].toString().trim();
+    var sheetName = col[27][0].toString().trim();
     if (sheetName == "") {
         return "No sheet selected. Update Controls sheet.";
     } else if (!SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName)) {
@@ -20,7 +20,7 @@ function checkControlValues() {
     }
     ScriptProperties.setProperty("sheetName", sheetName);
 
-    var subdomain = col[14][0].toString().trim();
+    var subdomain = col[28][0].toString().trim();
     if (subdomain == "") {
         return "No subdomain selected. Update Controls sheet."
     }
