@@ -10,9 +10,9 @@ function onOpen() {
 
 // Get/update the control values.
 function checkControlValues() {
-    var col = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Controls").getRange("C1:C29").getValues();
+    var col = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Controls").getRange("C1:C32").getValues();
 
-    var sheetName = col[27][0].toString().trim();
+    var sheetName = col[30][0].toString().trim();
     if (sheetName == "") {
         return "No sheet selected. Update Controls sheet.";
     } else if (!SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName)) {
@@ -20,25 +20,25 @@ function checkControlValues() {
     }
     ScriptProperties.setProperty("sheetName", sheetName);
 
-    var subdomain = col[28][0].toString().trim();
+    var subdomain = col[31][0].toString().trim();
     if (subdomain == "") {
         return "No subdomain selected. Update Controls sheet."
     }
     ScriptProperties.setProperty("baseUrl", "https://" + subdomain + ".harvestapp.com");
 
-    var projectId = col[16][0].toString().trim();
+    var projectId = col[19][0].toString().trim();
     if (projectId == "") {
         return "No project selected. Update Controls sheet."
     }
     ScriptProperties.setProperty("projectId", projectId);
 
-    var clientId = col[23][0].toString().trim();
+    var clientId = col[26][0].toString().trim();
     if (clientId == "") {
         return "Client ID not found. Update Controls sheet."
     }
     ScriptProperties.setProperty("clientId", clientId);
 
-    var clientSecret = col[24][0].toString().trim();
+    var clientSecret = col[27][0].toString().trim();
     if (clientSecret == "") {
         return "Client secret not found. Update Controls sheet."
     }
@@ -141,7 +141,7 @@ function scanSheet(upload) {
 function generateRedirectURI() {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Controls");
 
-    var projectKeyCell = sheet.getRange(20, 3, 1, 1);
+    var projectKeyCell = sheet.getRange(24, 3, 1, 1);
 
     projectKeyCell.setValue("https://script.google.com/macros/d/" + ScriptApp.getProjectKey() + "/usercallback");
 }
